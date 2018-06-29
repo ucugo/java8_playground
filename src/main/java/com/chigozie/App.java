@@ -4,9 +4,9 @@ import com.chigozie.error.NoAvailableRateException;
 import com.chigozie.error.UnfulfilledRequestException;
 import com.chigozie.pojo.LoanRequest;
 import com.chigozie.pojo.LoanResponse;
+import com.chigozie.quotes.MarketDataBaseRateSelector;
 import com.chigozie.quotes.QuoteSelector;
 import com.chigozie.service.LoanProcessor;
-import com.chigozie.quotes.MarketDataBaseRateSelector;
 
 import java.io.IOException;
 
