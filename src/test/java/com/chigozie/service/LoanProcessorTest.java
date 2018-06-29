@@ -6,6 +6,7 @@ import com.chigozie.pojo.LoanRequest;
 import com.chigozie.pojo.LoanResponse;
 import com.chigozie.pojo.MarketData;
 import com.chigozie.quotes.MarketDataBaseRateSelector;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,6 +60,13 @@ class LoanProcessorTest {
     public void should_fail_when_principal_is_not_an_increment_of_hundred_from_least_amount() {
         LoanRequest request = LoanRequest.builder().withMarketDataFilePath("any_path").withPrincipal(1050).withTermInMonths(36).build();
         assertThrows(UnfulfilledRequestException.class, () -> loanProcessor.getQuote(request));
+    }
+
+    @Test
+    public void should_throw_unavailable_quote_exception() throws IOException, NoAvailableRateException {
+        Mockito.when(marketDataBaseRateSelector.getQuote(ArgumentMatchers.any(String.class))).thenReturn(Optional.empty());
+        LoanRequest request = LoanRequest.builder().withMarketDataFilePath("path").withPrincipal(1000).withTermInMonths(36).build();
+        Assertions.assertThrows(NoAvailableRateException.class, ()-> loanProcessor.getQuote(request));
     }
 
     private Optional<MarketData> dummyMarketData() {

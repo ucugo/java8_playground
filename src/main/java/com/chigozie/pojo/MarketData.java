@@ -40,7 +40,6 @@ public class MarketData {
 
     @Override
     public int hashCode() {
-
         return hash(lender, rate, available);
     }
 }
