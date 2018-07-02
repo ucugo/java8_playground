@@ -43,7 +43,7 @@
     </dependencies>
 
     <build>
-        <finalName>zoopla-test</finalName>
+        <finalName>zoopa-test</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
